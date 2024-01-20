@@ -41,7 +41,7 @@ export default function Footer() {
               <ul className="text-gray-500 font-medium">
                 <li className="mb-4">
                   <a
-                    href="https://github.com/sag06"
+                    href="https://github.com/sagarD06/"
                     className="hover:underline"
                     target="_blank"
                     rel="noreferrer"
