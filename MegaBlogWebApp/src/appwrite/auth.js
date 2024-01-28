@@ -27,7 +27,7 @@ export class AuthService {
         return userAccount;
       }
     } catch (error) {
-      tconsole.error("Appwrite service :: createAccount :: error : ", error);
+      console.error("Appwrite service :: createAccount :: error : ", error);
     }
   }
 
