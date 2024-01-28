@@ -33,11 +33,12 @@ export class DataBaseService {
     }
   }
 
-  getPosts() {
+  async getPosts(queries = [Query.equal("status", "active")]) {
     try {
-      return this.databases.listDocuments(
+      return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
-        conf.appwritCollectionId
+        conf.appwritCollectionId,
+        queries
       );
     } catch (error) {
       console.error("Appwrite service :: getPosts :: error : ", error);
@@ -45,13 +46,12 @@ export class DataBaseService {
     }
   }
 
-  async getPost(queries = [Query.equal("status", "active")]) {
+  async getPost(slug) {
     try {
       return await this.databases.getDocument(
         conf.appwriteDatabaseId,
         conf.appwritCollectionId,
-        slug,
-        queries
+        slug
       );
     } catch (error) {
       console.error("Appwrite service :: getPost :: error : ", error);
