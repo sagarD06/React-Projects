@@ -9,7 +9,7 @@ export class DataBaseService {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
-    this.databases = new Databases(client);
+    this.databases = new Databases(this.client);
   }
 
   //   CRUD Methods.
@@ -29,7 +29,7 @@ export class DataBaseService {
         }
       );
     } catch (error) {
-      console.error("Appwrite service :: createPost :: error : ", error);
+      console.log("Appwrite service :: createPost :: error : ", error);
     }
   }
 
@@ -41,7 +41,7 @@ export class DataBaseService {
         queries
       );
     } catch (error) {
-      console.error("Appwrite service :: getPosts :: error : ", error);
+      console.log("Appwrite service :: getPosts :: error : ", error);
       return false;
     }
   }
@@ -54,7 +54,7 @@ export class DataBaseService {
         slug
       );
     } catch (error) {
-      console.error("Appwrite service :: getPost :: error : ", error);
+      console.log("Appwrite service :: getPost :: error : ", error);
       return false;
     }
   }
@@ -73,7 +73,7 @@ export class DataBaseService {
         }
       );
     } catch (error) {
-      console.error("Appwrite service :: updatePost :: error : ", error);
+      console.log("Appwrite service :: updatePost :: error : ", error);
     }
   }
 
@@ -86,7 +86,7 @@ export class DataBaseService {
       );
       return true;
     } catch (error) {
-      console.error("Appwrite service :: deletePost :: error : ", error);
+      console.log("Appwrite service :: deletePost :: error : ", error);
       return false;
     }
   }

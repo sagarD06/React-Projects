@@ -9,7 +9,7 @@ export class StorageService {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
-    this.storage = new Storage(client);
+    this.storage = new Storage(this.client);
   }
 
   async uploadFile(file) {
@@ -20,7 +20,7 @@ export class StorageService {
         file
       );
     } catch (error) {
-      console.error("Appwrite service :: uploadFile :: error : ", error);
+      console.log("Appwrite service :: uploadFile :: error : ", error);
       return false;
     }
   }
@@ -30,7 +30,7 @@ export class StorageService {
       await this.storage.deleteFile(conf.appwriteBucketId, fileId);
       return true;
     } catch (error) {
-      console.error("Appwrite service :: deleteFile :: error : ", error);
+      console.log("Appwrite service :: deleteFile :: error : ", error);
       return false;
     }
   }
@@ -39,7 +39,7 @@ export class StorageService {
     try {
       return this.storage.getFilePreview(conf.appwriteBucketId, fileId);
     } catch (error) {
-      console.error("Appwrite service :: getFilePreview :: error : ", error);
+      console.log("Appwrite service :: getFilePreview :: error : ", error);
       return false;
     }
   }
