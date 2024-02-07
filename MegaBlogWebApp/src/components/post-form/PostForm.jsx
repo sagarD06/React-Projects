@@ -1,11 +1,12 @@
 import React, { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import {Input,RTE,Select,Button} from "../index";
 import dataBaseService from "../../appwrite/databaseConfig";
 import storageService from "../../appwrite/storageConfig";
 import { useSelector } from "react-redux";
 
-function PostForm(post) {
+function PostForm({post}) {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const { register, handleSubmit, watch, setValue, control, getValues } =
@@ -58,7 +59,7 @@ function PostForm(post) {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
     return "";
   });
@@ -81,17 +82,17 @@ function PostForm(post) {
           placeholder="Title"
           className="mb-4"
           {...register("title", { required: true })}
+          onInput={(e) => {
+            setValue("slug", slugTransform(e.currentTarget.value), {
+              shouldValidate: true,
+            });
+          }}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
           className="mb-4"
           {...register("slug", { required: true })}
-          onInput={(e) => {
-            setValue("slug", slugTransform(e.currentTarget.value), {
-              shouldValidate: true,
-            });
-          }}
         />
         <RTE
           label="Content :"
@@ -111,7 +112,7 @@ function PostForm(post) {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
+              src={storageService.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />

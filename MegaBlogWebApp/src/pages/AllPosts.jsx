@@ -5,7 +5,7 @@ import dataBaseService from "../appwrite/databaseConfig";
 function AllPosts() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    dataBaseService.getPosts([]).then((posts) => {
+    dataBaseService.getPosts().then((posts) => {
       if (posts) setPosts(posts.documents);
     });
   });
